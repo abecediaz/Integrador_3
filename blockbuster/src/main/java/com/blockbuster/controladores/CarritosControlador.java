@@ -44,7 +44,7 @@ public class CarritosControlador {
         model.addAttribute("items_carritos", carrito_cliente);
         model.addAttribute("monto_total", peliculasServicio.calcularTotal(clientesServicio.getLoggedUsername()));
 
-        return "carritos";
+        return "carrito";
     }
 
     @PostMapping("/agregar/{id_peliculas}")
@@ -59,7 +59,7 @@ public class CarritosControlador {
     }
 
     @PostMapping("/eliminar/{id_peliculas}")
-    public String removeFromCart(@PathVariable Long id_peliculas, @SessionAttribute(value = "carritos", required = false) Map<Long, Integer> carritos) {
+    public String removeFromCart(@PathVariable Long id_peliculas, @SessionAttribute(value = "carrito", required = false) Map<Long, Integer> carritos) {
 
         if (carritos != null) {
             carritos.remove(id_peliculas);

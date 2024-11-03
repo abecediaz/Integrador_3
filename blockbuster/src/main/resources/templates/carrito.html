@@ -42,45 +42,45 @@
     </header>
 
     <div class="container container-fluid">
-    <h2 class="titles">CART</h2>
+        <h2 class="titles">CART</h2>
 
-    <div th:if="${ItemsCarritos.isEmpty()}" class="container container-fluid" style="color: antiquewhite">
-        Cart empty
-    </div>
+        <div th:if="${items_carritos.item_carrito.size() == 0}" class="container container-fluid" style="color: antiquewhite">
+            Cart empty
+        </div>
 
-    <div th:unless="${ItemsCarritos.isEmpty()}" class="container container-fluid">
-        <table class="w-full">
-            <thead>
-               <tr>
-                   <th class="text-left">Movie</th>
-                   <th class="text-left">Price</th>
-                   <th class="text-left">Quantity</th>
-                   <th class="text-left">Total</th>
-               </tr>
-            </thead>
+        <div th:unless="${items_carritos.item_carrito.size() == 0}" class="container container-fluid">
+            <table class="w-full">
+                <thead>
+                   <tr>
+                       <th class="text-left">Movie</th>
+                       <th class="text-left">Price</th>
+                       <th class="text-left">Quantity</th>
+                       <th class="text-left">Total</th>
+                   </tr>
+                </thead>
 
-            <tbody>
-            <tr th:each="item : ${ItemsCarritos}">
-                <td th:text="${item.pelicula.titulo_peliculas}" class="col-2"></td>
-                <td th:text="${'$' + item.pelicula.precio_peliculas}" class="col-2"></td>
-                <td th:text="${item.pelicula.titulo_peliculas}" class="col-2"></td>
-                <td th:text="${item.cantidad_items_carritos}" class="col-2"></td>
-                <td th:text="${'$' + item.pelicula.precio_peliculas * item.cantidad_items_carritos}" class="col-2"></td>
-                <td>
-                    <form th:action="@{/eliminar/{id_peliculas}(id_peliculas=${item.pelicula.id_peliculas})}" method="POST">
-                        <button type="submit" class="btn btn-warning mb-2">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
+                <tbody>
+                <tr th:each="item : ${items_carritos.item_carrito}">
+                    <td th:text="${item.pelicula.titulo_peliculas}" class="col-2">Movie</td>
+                    <td th:text="${'$' + item.pelicula.precio_peliculas}" class="col-2">Price</td>
+                    <td th:text="${item.cantidad_items_carritos}" class="col-2">Quantity</td>
+                    <td th:text="${'$' + item.pelicula.precio_peliculas * item.cantidad_items_carritos}" class="col-2">Total</td>
+                    <td>
+                        <form th:action="@{/carrito/eliminar/{id_peliculas}(id_peliculas=${item.pelicula.id_peliculas})}" method="POST">
+                            <button type="submit" class="btn btn-warning mb-2">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
 
-            <tfoot>
-            <tr>
-                <td>Total:</td>
-                <td th:text="${'$' + total}"></td>
-            </tr>
-            </tfoot>
-        </table>
+                <tfoot>
+                <tr>
+                    <td>Total:</td>
+                    <td th:text="${'$' + monto_total}"></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 
     <div class="container container-fluid">
